@@ -1,0 +1,21 @@
+<div class="well">
+  <div class="dl-horizontal">
+    <dt>Name:</dt>
+    <dd><%= @user.name %></dd>
+  </div>
+</div>
+
+
+<% posts_tab_logic = 'active' if  params[:tab].nil? %>
+<% comments_tab_logic = 'active' if  params[:tab]== 'comments' %>
+<dl class="nav nav-tabs">
+  <li class= <%= posts_tab_logic %> ><%= link_to "posts", user_path(@user) %></li>
+  <li class= <%= comments_tab_logic %> ><%= link_to "comments", user_path(@user, tab: 'comments') %></li>
+</dl>
+
+
+<% if params[:tab].nil? %>
+  <%= render @user.posts %>
+<% else %>
+  <%= render @user.comments %>
+<% end %>

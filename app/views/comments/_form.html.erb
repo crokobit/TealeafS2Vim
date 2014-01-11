@@ -1,0 +1,9 @@
+<div class="well">
+  <%= form_for [@post,@comment] do |f| %>
+    <%= f.label :body, 'Leave a comment' %>
+    <div class="control-group">
+        <%= f.text_area :body, row: 3, class: 'span' %>
+    </div>
+    <%= f.submit "submit comment", class: 'btn btn-primary' %>
+  <% end %>
+</div>
