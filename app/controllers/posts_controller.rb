@@ -36,6 +36,17 @@ class PostsController < ApplicationController
       render :new
     end
   end
+
+  def vote
+    @post = Post.find(params[:id])
+    vote = Vote.create(vote: params[:vote], creator: current_user, voteable: @post)
+    if vote.valid?
+      flash[:notice] = 'Vote Success'
+    else
+      flash[:error] = 'Only onece'
+    end
+    redirect_to :back
+  end
   
   private
 
