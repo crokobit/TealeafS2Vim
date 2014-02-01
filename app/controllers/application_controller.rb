@@ -11,17 +11,17 @@ class ApplicationController < ActionController::Base
   end
   
   def require_user
-    if !logged_in?
-      flash[:error] = 'Not logged in'
-      redirect_to root_path
-    end
+    access_denied unless logged_in?
   end
 
   def require_admin
-    if !current_user.admin?
-      flash[:error] = 'Not admin'
-      redirect_to root_path
-    end
+    access_denied unless current_user.admin?
+  end
+
+
+  def access_denied
+    flash[:error] = 'Access Denied'
+    redirect_to root_path
   end
 
   def logged_in?
