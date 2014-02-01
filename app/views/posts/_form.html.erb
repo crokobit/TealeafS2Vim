@@ -15,6 +15,9 @@
         <%= f.label :description %>
         <%= f.text_field :description %>
     </div>
+    <div class="control-group">
+        <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
+    </div>
     <%= f.submit "submit" %>
   <% end %>
 </div>
