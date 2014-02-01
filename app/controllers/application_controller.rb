@@ -17,7 +17,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
+  def require_admin
+    if !current_user.admin?
+      flash[:error] = 'Not admin'
+      redirect_to root_path
+    end
+  end
 
   def logged_in?
     !!current_user
