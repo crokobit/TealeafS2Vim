@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:notice] = 'Update success'
-      redirect_to users_path
+      redirect_to root_path
     else
       render :edit
     end
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   end 
   
   def require_same_user
-    if params[:id].to_i != session[:user_id]
+    if params[:id] != User.find(session[:user_id]).slug
       flash[:error] = 'Require same user'
       redirect_to root_path 
     end
@@ -48,6 +48,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:password, :name)
+    params.require(:user).permit(:time_zone, :password, :name)
   end
 end
